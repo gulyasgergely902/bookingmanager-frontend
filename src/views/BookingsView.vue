@@ -1,24 +1,19 @@
 <template>
   <div class="p-6 max-w-lg mx-auto">
-    <h1 class="text-2xl font-bold mb-4">Select a Booking Date</h1>
+    <h1 class="text-2xl font-bold mb-4">Booking</h1>
     
-    <!-- Date Picker -->
-    <input 
-      type="date" 
-      v-model="selectedDate" 
-      class="border p-2 rounded w-full mb-4" 
-      @change="fetchAvailableSlots"
-    />
-    
-    <!-- Time Slots -->
-    <div v-if="loading" class="text-center text-gray-500">Loading...</div>
-    <ul v-else-if="timeSlots.length" class="space-y-2">
-      <li 
-        v-for="slot in timeSlots" 
-        :key="slot" 
-        class="p-3 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600">
-        {{ slot }}
-      </li>
+    <fieldset class="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
+        <legend class="fieldset-legend">Date</legend>
+        <input type="date" v-model="selectedDate" class="border p-2 rounded w-full mb-4" @change="fetchAvailableSlots"/>
+        <p class="fieldset-label">Choose a date for the booking.</p>
+    </fieldset>
+    <div class="divider"></div>
+    <span v-if="loading" class="loading loading-spinner loading-md"></span>
+    <ul v-else-if="timeSlots.length" class="list bg-base-100 rounded-box shadow-md">
+        <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Available time slots</li>
+        <li v-for="slot in timeSlots" :key="slot" class="list-row">
+            {{ slot }}
+        </li>
     </ul>
     <div v-else class="text-gray-500">No slots available for this date.</div>
   </div>
